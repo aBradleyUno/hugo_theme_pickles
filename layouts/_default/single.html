@@ -3,15 +3,34 @@
 <article class="p-article">
   <header>
     <h1>{{ .Title }}</h1>
+    <div class="content-meta">
+      <ul>
+        {{ if not .Params.hideDate }}
+        <li>
+          <img src="/fontawesome/calendar-alt-solid.svg">{{ partial "timestamp.html" . }}
+        </li>
+        {{ end }}
+        <li>
+          <img src="/fontawesome/paw-solid.svg" alt="Author">Author:
+        {{ if isset .Params "author" }}
+          {{ $author := index .Site.Data.authors .Params.author }}
+          {{ $author.name }}
+        {{ else }}
+          Unknown
+        {{ end }}
+        </li>
+        {{ if isset .Params "tags" }}
+          <li>
+            <img src="/fontawesome/tags-solid.svg" alt="Categories">
+            {{ range .Params.tags }}
+            <a href="{{ $baseurl }}/tags/{{ . | urlize }}" class="c-tag">{{ . }}</a>
+            {{ end }}
+<!--            <a href="https://www.thepolyglotdeveloper.com/categories/web-development/">Web Development</a>-->
+          </li>
+        {{end}}
+      </ul>
+    </div>
     <div>
-      {{ if not .Params.hideDate }}
-        <div class="c-time">
-          {{ partial "timestamp.html" . }}
-        </div>
-      {{ end }}
-      {{ range .Params.tags }}
-      <a href="{{ $baseurl }}/tags/{{ . | urlize }}" class="c-tag">{{ . }}</a>
-      {{ end }}
     </div>
   </header>
   {{ with .Params.thumbnail }}

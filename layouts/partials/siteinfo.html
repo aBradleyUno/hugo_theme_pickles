@@ -1,26 +1,203 @@
-{{ if or ( $.Param "avatar" ) ( $.Param "author" ) ( $.Param "bio" ) ( $.Param "contact" ) }}
+{{ if isset .Params "author" }}
+{{ $author := index .Site.Data.authors .Params.author }}
+{{ if or ( $author.avatar ) ( $author.name ) ( $author.bio ) ( $author.contact ) }}
 <aside class="p-author">
-  {{ with ($.Param "avatar") }}
+  {{ with ($author.avatar) }}
   <div class="c-avatar p-author__avatar">
     <img alt="Author Avatar" src="{{ . }}" />
   </div>
   {{ end }}
-  {{ if or ( $.Param "author" ) ( $.Param "bio" ) ( $.Param "contact" ) }}
+  {{ if or ( $author.name ) ( $author.bio ) ( $author.contact ) }}
   <div class="p-author__body">
-    {{ with ($.Param "author") }}
+    {{ with ($author.name) }}
     <p class="c-title p-author__name ">{{ . }}</p>
     {{ end }}
-    {{ with ($.Param "bio") }}
+    {{ with ($author.bio) }}
     <p>{{ . }}</p>
     {{ end }}
-    {{ with ($.Param "contact") }}
+    {{ with ($author.contact) }}
     <p>
       <a href="{{ . }}">
         Contact me
       </a>
     </p>
     {{ end }}
+    {{ if or ( isset $author.social "medium" ) ( isset $author.social "twitter" ) ( isset $author.social "facebook" ) ( isset $author.social "instagram" ) ( isset $author.social "github" ) ( isset $author.social "gitlab" ) ( isset $author.social "npm" ) ( isset $author.social "codepen" ) ( isset $author.social "dribbble" ) ( isset $author.social "fivehundredpx" ) ( isset $author.social "flickr" ) ( isset $author.social "pinterest" ) ( isset $author.social "tumblr" ) ( isset $author.social "vimeo" ) ( isset $author.social "youtube" ) ( isset $author.social "linkedin" ) ( isset $author.social "strava" ) }}
+    <ul class="c-links" style="justify-content: flex-start; margin-left: -8px;">
+      {{ with ( $author.social.medium) }}
+      <li class="c-links__item">
+        <a href="https://medium.com/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>medium</title>
+            <use xlink:href="#icon-medium"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+      {{ with ($author.social.twitter) }}
+      <li class="c-links__item">
+        <a href="https://twitter.com/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>twitter</title>
+            <use xlink:href="#icon-twitter"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+      {{ with ($author.social.facebook) }}
+      <li class="c-links__item">
+        <a href="https://facebook.com/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>facebook</title>
+            <use xlink:href="#icon-facebook"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+      {{ with ($author.social.instagram) }}
+      <li class="c-links__item">
+        <a href="https://instagram.com/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>instagram</title>
+            <use xlink:href="#icon-instagram"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+      {{ with ($author.social.github) }}
+      <li class="c-links__item">
+        <a href="https://github.com/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>github</title>
+            <use xlink:href="#icon-github"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+      {{ with ($author.social.gitlab) }}
+      <li class="c-links__item">
+        <a href="https://gitlab.com/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>gitlab</title>
+            <use xlink:href="#icon-gitlab"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+      {{ with ($author.social.npm) }}
+      <li class="c-links__item">
+        <a href="https://www.npmjs.com/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>npm</title>
+            <use xlink:href="#icon-npm"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+      {{ with ($author.social.codepen) }}
+      <li class="c-links__item">
+        <a href="https://codepen.io/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>codepen</title>
+            <use xlink:href="#icon-codepen"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+      {{ with ($author.social.dribbble) }}
+      <li class="c-links__item">
+        <a href="https://dribbble.com/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>dribbble</title>
+            <use xlink:href="#icon-dribbble"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+      {{ with ($author.social.fivehundredpx) }}
+      <li class="c-links__item">
+        <a href="https://500px.com/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>500px</title>
+            <use xlink:href="#icon-500px"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+      {{ with ($author.social.flickr) }}
+      <li class="c-links__item">
+        <a href="https://www.flickr.com/photos/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>flickr</title>
+            <use xlink:href="#icon-flickr"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+      {{ with ($author.social.pinterest) }}
+      <li class="c-links__item">
+        <a href="https://www.pinterest.jp/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>pinterest</title>
+            <use xlink:href="#icon-pinterest"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+      {{ with ($author.social.tumblr) }}
+      <li class="c-links__item">
+        <a href="https://www.tumblr.com/blog/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>tumblr</title>
+            <use xlink:href="#icon-tumblr"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+      {{ with ($author.social.vimeo) }}
+      <li class="c-links__item">
+        <a href="https://vimeo.com/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>vimeo</title>
+            <use xlink:href="#icon-vimeo"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+      {{ with ($author.social.youtube) }}
+      <li class="c-links__item">
+        <a href="https://www.youtube.com/user/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>youtube</title>
+            <use xlink:href="#icon-youtube"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+      {{ with ($author.social.linkedin) }}
+      <li class="c-links__item">
+        <a href="https://linkedin.com/in/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>linkedin</title>
+            <use xlink:href="#icon-linkedin"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+      {{ with ($author.social.strava) }}
+      <li class="c-links__item">
+        <a href="https://www.strava.com/athletes/{{ . }}" target="_blank">
+          <svg viewBox="0 0 64 64" class="c-links__icon">
+            <title>strava</title>
+            <use xlink:href="#icon-strava"></use>
+          </svg>
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+    {{ end }}
   </div>
   {{ end }}
 </aside>
+{{ end }}
 {{ end }}
