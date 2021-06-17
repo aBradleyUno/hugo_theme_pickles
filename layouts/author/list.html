@@ -1,0 +1,24 @@
+{{ partial "header.html" . }}
+{{ $baseurl := .Site.BaseURL | sanitizeurl }}
+{{ $author := index .Site.Data.authors .Params.alias }}
+<h1>{{ $author.name }}</h1>
+<img src="{{ $author.avatar }}" alt=""/>
+
+<h2>Bio</h2>
+{{ .Content }}
+{{ with $author.social.twitter }}
+<p>
+    <a href="https://twitter.com/{{ . }}">
+        Follow {{ $author.name }} on Twitter
+    </a>
+</p>
+{{ end }}
+
+<h2>Articles</h2>
+<ul>
+    {{ range .Data.Pages }}
+    <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+    {{ end }}
+</ul>
+
+{{ partial "footer.html" . }}

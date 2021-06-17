@@ -1,4 +1,5 @@
 {{ if isset .Params "author" }}
+{{ $baseurl := .Site.BaseURL | sanitizeurl }}
 {{ $author := index .Site.Data.authors .Params.author }}
 {{ if or ( $author.avatar ) ( $author.name ) ( $author.bio ) ( $author.contact ) }}
 <aside class="p-author">
@@ -10,7 +11,7 @@
   {{ if or ( $author.name ) ( $author.bio ) ( $author.contact ) }}
   <div class="p-author__body">
     {{ with ($author.name) }}
-    <p class="c-title p-author__name ">{{ . }}</p>
+    <p class="c-title p-author__name "><a href="{{ $baseurl }}/author/{{ $.Params.author }}" style="color: #555;">{{ . }}</a></p>
     {{ end }}
     {{ with ($author.bio) }}
     <p>{{ . }}</p>

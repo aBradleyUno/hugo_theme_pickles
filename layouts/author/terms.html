@@ -1,0 +1,27 @@
+{{ partial "header.html" . }}
+{{ $baseurl := .Site.BaseURL | sanitizeurl }}
+<section>
+    <h2>Authors</h2>
+    <ul>
+        {{ range .Data.Pages }}
+        {{ $author := index .Site.Data.authors .Params.alias }}
+        <aside class="p-author p-author-card" style="">
+            {{ with ( $author.avatar) }}
+            <div class="c-avatar p-author__avatar">
+                <img alt="Author Avatar" src="{{ . }}" />
+            </div>
+            {{ end }}
+            {{ if or ( $author.name ) ( $author.bio ) ( $author.contact ) }}
+            <div class="p-author__body">
+                <p class="c-title p-author__name "><a href="{{ .Permalink }}" style="color: #555">{{ $author.name }}</a></p>
+                {{ with ( $author.bio) }}
+                <p>{{ . }}</p>
+                {{ end }}
+                <a href="{{ .Permalink }}" class="c-article__btn p-list-article__btn">About me</a>
+            </div>
+            {{ end }}
+        </aside>
+        {{ end }}
+    </ul>
+</section>
+{{ partial "footer.html" . }}
