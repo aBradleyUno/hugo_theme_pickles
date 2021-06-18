@@ -14,7 +14,7 @@
           <img src="/fontawesome/paw-solid.svg" alt="Author">Author:
           {{ if isset .Params "author" }}
           {{ $author := index .Site.Data.authors .Params.author }}
-          {{ $author.name }}
+          <a href="{{ $baseurl }}/author/{{ $.Params.author }}" style="color: #555;">{{ $author.name }}</a>
           {{ else }}
           Unknown
           {{ end }}
