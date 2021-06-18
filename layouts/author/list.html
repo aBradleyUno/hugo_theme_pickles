@@ -1,18 +1,47 @@
 {{ partial "header.html" . }}
 {{ $baseurl := .Site.BaseURL | sanitizeurl }}
 {{ $author := index .Site.Data.authors .Params.alias }}
-<h1>{{ $author.name }}</h1>
-<img src="{{ $author.avatar }}" alt=""/>
+<div>
+    {{ with ($author.cover) }}
+    <div class="container" style="background: url('{{ . }}') no-repeat center center; background-size: cover;"></div>
+    {{ end }}
 
-<h2>Bio</h2>
-{{ .Content }}
-{{ with $author.social.twitter }}
-<p>
-    <a href="https://twitter.com/{{ . }}">
-        Follow {{ $author.name }} on Twitter
-    </a>
-</p>
-{{ end }}
+    <div class="cover">
+        {{ with ($author.avatar) }}
+        <div class="c-avatar p-author__avatar cover-photo">
+            <img alt="Author Avatar" src="{{ . }}" />
+        </div>
+        {{ end }}
+        <div style="padding-left: 15px;">
+            <h1>{{ $author.name }}</h1>
+            {{ with ($author.bio) }}
+            <p>{{ . }}</p>
+            {{ end }}
+        </div>
+    </div>
+</div>
+
+<div class="cover">
+    <div>
+        <h2>Bio</h2>
+        {{ .Content }}
+        {{ with $author.social.twitter }}
+        <p>
+            <a href="https://twitter.com/{{ . }}">
+                Follow {{ $author.name }} on Twitter
+            </a>
+        </p>
+        {{ end }}
+    </div>
+    <div>
+        <h2>GPG Public Key</h2>
+        <a href="{{ $author.pubkey }}">
+            <img style="max-width: 200px" src="{{ $author.qr_code }}" alt=""/>
+        </a>
+    </div>
+
+</div>
+
 
 <h2>Articles</h2>
 <ul>
